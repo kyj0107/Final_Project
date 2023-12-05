@@ -16,18 +16,18 @@ app.config['SECRET_KEY'] = 'your secret key'
 def index():
     
     
-    return "<h1>Index Page</h1>"
+    return render_template('index.html')
 
 @app.route('/admin/', methods=('GET', 'POST'))
 def admin():
     
 
-    return "<h1>Admin Stuff</h1>"
+    return render_template('admin.html')
 
 @app.route('/reservations/', methods=('GET', 'POST'))
 def reservations():
 
-    return "<h1>Reservations Stuff</h1>"
+    return render_template('reservations.html')
 
 
 app.run(host="0.0.0.0", port=5001)

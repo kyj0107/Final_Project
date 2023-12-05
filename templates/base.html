@@ -28,10 +28,11 @@
     </style>
 </head>
 <body>
-    <nav>
+    <nav> 
         <a href="{{ url_for('index') }}">Home</a>
-        <a href="#">Admin</a>
-        <a href="#">Reservations</a>
+        <a href="{{ url_for('admin') }}">Admin</a>
+        <a href="{{ url_for('reservations') }}">Reservations</a>
+ 
     </nav>
     <hr>
     <div class="content">
