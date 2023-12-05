@@ -1,2 +1,36 @@
 {% extends 'base.html' %}
 
+{% block content %}
+<div class="white-box">
+    <h1 class="title">IT-4320 Trip Reservation System</h1>
+    <hr>
+    <p class="intro"><b>Welcome to the IT-4320 reservation system. Use the select box to choose whether to make a reservation or log in as administrator.</b></p>
+
+    <label for="menu"><b>Choose Menu Option:</b></label>
+    <div>
+
+    <form id="myForm" action="">
+        <select id="menu" name="menu">
+            <option>Choose an Option</option>
+            <option value="admin">Admin Login</option>
+            <option value="reservations">Reserve a Seat</option>
+        </select>
+        <div>
+        <br>
+        <button type="button" onclick="redirectToPage()">Submit</button>
+        </div>
+        </form>   
+</div>
+
+
+<script>
+    function redirectToPage() {
+      var selectedPage = document.getElementById('menu').value;
+      if (selectedPage !== 'Choose an Option') {
+        window.location.href = selectedPage;
+      } else {
+        alert('Please select an option');
+      }
+    }
+  </script>
+{% endblock %}
