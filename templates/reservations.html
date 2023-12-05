@@ -1,1 +1,65 @@
 {% extends 'base.html' %}
+
+{% block content %}
+<div class="white-box">
+    <h1 class="title">Reserve Your Seat</h1>
+    <hr>
+    <h2>Seating Chart</h2>
+
+    <div>
+
+        <form>
+            <label for="fname">First Name:</label><br>
+            <input type="text" id="fname" name="fname"><br><br>
+
+            <label for="lname">Last Name:</label><br>
+            <input type="text" id="lname" name="lname"><br><br>
+
+            <label for="row">Choose a Row</label><br>
+            <select id="row" name="row">
+                <option>Choose a Row</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+            </select><br><br>
+
+            <label for="column">Choose a Column</label><br>
+            <select id="column" name="column">
+                <option>Choose a Column</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+            </select>
+
+            <div>
+                <br>
+                <button type="button" onclick="createReservation()">Submit</button>
+                </div>
+        </form>  
+</div>
+
+
+<script>
+    function createReservation() {
+      var firstName = document.getElementById('fname').value;
+      var lastName = document.getElementById('lname').value;
+      var row = document.getElementById('row').value;
+      var column = document.getElementById('column').value;
+      if (firstName !== '' && lastName !== '' && row !== 'Choose a Row' && column !== 'Choose a Column') {
+        //Create and process reservation
+      } else {
+        alert('Form has incomplete information. Please fill in all requested information.');
+      }
+    }
+  </script>
+{% endblock %}
