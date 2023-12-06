@@ -60,41 +60,22 @@ def save_reservation(first_name, seat_row, seat_column, ticket_number):
     file.write("{}, {}, {}, {}\n".format(first_name, seat_row, seat_column, ticket_number))
     file.close()
 
-# @app.route('/')
-# def index():
+@app.route('/')
+def index():
     
     
-#     return "<h1>Index Page</h1>"
+    return "<h1>Index Page</h1>"
 
-# @app.route('/admin/', methods=('GET', 'POST'))
-# def admin():
+@app.route('/admin/', methods=('GET', 'POST'))
+def admin():
     
 
-#     return "<h1>Admin Stuff</h1>"
+    return "<h1>Admin Stuff</h1>"
 
-# @app.route('/reservations/', methods=('GET', 'POST'))
-# def reservations():
+@app.route('/reservations/', methods=('GET', 'POST'))
+def reservations():
 
-#     return "<h1>Reservations Stuff</h1>"
+    return "<h1>Reservations Stuff</h1>"
 
 
-# app.run(host="0.0.0.0", port=5001)
-
-def main():
-
-    chart = load_chart()
-    display = print_seating_chart(chart)
-
-    print(display)
-
-    first_name = input("Enter your first name: ")
-    last_name = input("Enter your last name: ")
-    seat_row = int(input("Enter a seat row: "))
-    seat_column = int(input("Enter a seat column: "))
-
-    ticket_number = generate_ticket(first_name)
-    save_reservation(first_name, seat_row, seat_column, ticket_number)
-    print("Congratulations, {}! Row: {}, Seat: {} has been reserved for you. Enjoy your trip!".format(first_name, seat_row, seat_column))
-    print("Your e-ticket number is: {}".format(ticket_number))
-
-main()
+app.run(host="0.0.0.0", port=5001)
