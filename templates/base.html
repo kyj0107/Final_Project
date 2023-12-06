@@ -37,9 +37,23 @@
             background-color: #ffd5de;
         }
 
-        .title {
-            text-align: center;
+        .success {
+            padding: 20px;
+            margin: 5px;
+            color: #970020;
+            background-color: #d5ffdc;
         }
+
+       .error {
+            padding: 20px;
+            margin: 5px;
+            color: #970020;
+            background-color: #ffd5de;
+        }
+
+                .title {
+                    text-align: center;
+                }
         
         .container {
             display: flex;
@@ -57,9 +71,11 @@
     </nav>
     <hr>
     <div class="content">
-        {% for message in get_flashed_messages() %}
-            <div class="alert">{{ message }}</div>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for category, message in messages %}
+          <div class="{{ category }}">{{ message }}</div>
         {% endfor %}
+      {% endwith %}
 
         {% block content %} {% endblock %}
     </div>
