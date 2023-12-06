@@ -6,6 +6,34 @@ app.config["DEBUG"] = True
 
 app.config['SECRET_KEY'] = 'your secret key'
 
+def load_chart():
+
+    chart = [['O','O','O','O'] for row in range(12)] # Thanks, Colton!
+
+    file = open("reservations.txt")
+
+    for line in file:
+        data = line.split(',')
+        row = int(data[1].strip())
+        column = int(data[2].strip())
+        for x in range(len(chart)):
+            for j in range(len(chart[x])):
+                if chart[row][column] == 'O':
+                    chart[row][column] = 'X'
+
+    file.close()
+
+    return chart
+
+def print_seating_chart(chart):
+
+    chart = load_chart()
+
+    for row in chart:
+        print(row)
+
+    return "Seating chart has been printed."
+
 def generate_ticket(first_name):
 
     bus_name = "INFOTC4320"
@@ -53,6 +81,11 @@ def save_reservation(first_name, seat_row, seat_column, ticket_number):
 # app.run(host="0.0.0.0", port=5001)
 
 def main():
+
+    chart = load_chart()
+    display = print_seating_chart(chart)
+
+    print(display)
 
     first_name = input("Enter your first name: ")
     last_name = input("Enter your last name: ")
