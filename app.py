@@ -1,11 +1,9 @@
 import sqlite3
 from flask import Flask, render_template, request, url_for, flash, redirect, abort
 
-# make a Flask application object called app
 app = Flask(__name__)
 app.config["DEBUG"] = True
 
-#flash  the secret key to secure sessions
 app.config['SECRET_KEY'] = 'your secret key'
 
 def check_login(username, password):
@@ -16,8 +14,60 @@ def check_login(username, password):
                 return True
     return False
 
+def load_chart():
 
-# use the app.route() decorator to create a Flask view function called index()
+    chart = [['O','O','O','O'] for row in range(12)] # Thanks, Colton!
+
+    file = open("reservations.txt")
+
+    for line in file:
+        data = line.split(',')
+        row = int(data[1].strip())
+        column = int(data[2].strip())
+        for x in range(len(chart)):
+            for j in range(len(chart[x])):
+                if chart[row][column] == 'O':
+                    chart[row][column] = 'X'
+
+    file.close()
+
+    return chart
+
+def print_seating_chart(chart):
+
+    chart = load_chart()
+
+    for row in chart:
+        print(row)
+
+    return "Seating chart has been printed."
+
+def generate_ticket(first_name):
+
+    bus_name = "INFOTC4320"
+    code = ""
+    count = 0
+
+    if len(first_name) < len(bus_name):
+        for letter in range(len(first_name)):
+            code += first_name[letter] + bus_name[letter]
+            count += 1
+        code += bus_name[count:]
+    elif len(first_name) == len(bus_name):
+        for letter in range(len(first_name)):
+            code += first_name[letter] + bus_name[letter]
+    else:
+        for letter in range(len(bus_name)):
+            code += first_name[letter] + bus_name[letter]
+            count += 1
+        code += first_name[count:]
+    return code
+
+def save_reservation(first_name, seat_row, seat_column, ticket_number):
+    file = open("reservations.txt", "a")
+    file.write("{}, {}, {}, {}\n".format(first_name, seat_row, seat_column, ticket_number))
+    file.close()
+
 @app.route('/')
 def index():
     
@@ -80,3 +130,4 @@ def get_sales(cost_matrix, bus):
     return sales
 
 app.run(host="0.0.0.0", port=5001)
+
