@@ -14,34 +14,6 @@ def check_login(username, password):
                 return True
     return False
 
-def load_chart():
-
-    chart = [['O','O','O','O'] for row in range(12)] # Thanks, Colton!
-
-    file = open("reservations.txt")
-
-    for line in file:
-        data = line.split(',')
-        row = int(data[1].strip())
-        column = int(data[2].strip())
-        for x in range(len(chart)):
-            for j in range(len(chart[x])):
-                if chart[row][column] == 'O':
-                    chart[row][column] = 'X'
-
-    file.close()
-
-    return chart
-
-def print_seating_chart(chart):
-
-    chart = load_chart()
-
-    for row in chart:
-        print(row)
-
-    return "Seating chart has been printed."
-
 @app.route('/')
 def index():
     
@@ -73,8 +45,10 @@ def reservations():
 
     return render_template('reservations.html')
 
-'''
-def generate_seating_chart()
+
+def generate_seating_chart():
+
+    chart = [['O','O','O','O'] for row in range(12)]
     file = open("reservations.txt")
 
     for line in file:
@@ -92,13 +66,13 @@ def generate_seating_chart()
 
 def print_seating_chart(chart):
 
-    chart = load_chart()
+    chart = generate_seating_chart()
 
     for row in chart:
         print(row)
 
     return "Seating chart has been printed."
-'''
+
 
 def get_cost_matrix():
     cost_matrix = [[100, 75, 50, 100] for row in range(12)]
