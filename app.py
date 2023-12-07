@@ -47,20 +47,26 @@ def reservations():
     chart = generate_seating_chart()
 
     if request.method == "POST":
-            first_name = request.form['fname']
-            last_name = request.form['lname']
-            row = int(request.form['row']) - 1
-            column = int(request.form['column']) - 1
+            try:
+                first_name = request.form['fname']
+                last_name = request.form['lname']
+                row = int(request.form['row']) - 1
+                column = int(request.form['column']) - 1
+                seat_available = check_seats(row, column)
 
-            if not first_name:
-                flash('First name is required!')
-            elif not last_name:
-                flash('Last name is required!')
-            else:
-                ticket = generate_ticket(first_name)
-                save_reservation(first_name, last_name, row, column, ticket)
-                success = True
-                return render_template('reservations.html', name=first_name, chart=chart, row=row, column=column, ticket=ticket, success=success)
+                if not first_name:
+                    flash('First name is required!')
+                elif not last_name:
+                    flash('Last name is required!')
+                elif seat_available == False:
+                    flash('Seat is not available!')
+                else:
+                    ticket = generate_ticket(first_name)
+                    save_reservation(first_name, row, column, ticket)
+                    success = True
+                    return render_template('reservations.html', name=first_name, chart=chart, row=row+1, column=column+1, ticket=ticket, success=success)
+            except:
+                flash("Make sure to choose a row and a seat!")
             
     return render_template('reservations.html', chart=chart)
 
@@ -114,6 +120,22 @@ def get_sales(cost_matrix, bus):
                 sales += cost_matrix[row][seat]
 
     return sales
+
+def check_seats(row, seat):
+
+    chart = generate_seating_chart()
+
+    while True:
+
+        if chart[int(row)][int(seat)] == 'X':
+            
+            return False
+            continue
+        
+        else:
+            
+            return True
+            break
 
 def generate_ticket(first_name):
 
