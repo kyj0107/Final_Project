@@ -17,7 +17,6 @@ def check_login(username, password):
 @app.route('/')
 def index():
     
-    
     return render_template('index.html')
 
 
@@ -33,7 +32,7 @@ def admin():
             flash('Login successful!', 'success')
             chart = generate_seating_chart()
             total_sales = get_sales(get_cost_matrix(), chart)
-            # print_bus_chart(chart)
+            # formatted_chart = print_bus_chart(chart)
             return render_template('admin.html', chart=chart, sales=total_sales)
             
         else:
@@ -45,7 +44,25 @@ def admin():
 @app.route('/reservations/', methods=('GET', 'POST'))
 def reservations():
 
-    return render_template('reservations.html')
+    chart = generate_seating_chart()
+
+    if request.method == "POST":
+            first_name = request.form['fname']
+            last_name = request.form['lname']
+            row = int(request.form['row']) - 1
+            column = int(request.form['column']) - 1
+
+            if not first_name:
+                flash('First name is required!')
+            elif not last_name:
+                flash('Last name is required!')
+            else:
+                ticket = generate_ticket(first_name)
+                save_reservation(first_name, last_name, row, column, ticket)
+                success = True
+                return render_template('reservations.html', name=first_name, chart=chart, row=row, column=column, ticket=ticket, success=success)
+            
+    return render_template('reservations.html', chart=chart)
 
 
 def generate_seating_chart():
@@ -80,11 +97,12 @@ def get_bus_chart(data,cost):
     return bus
 
 # def print_bus_chart(bus):
+    
+#     chart = ""
 #     for row in bus:
-#         print(row)
-
-#     return
-
+#         chart += str(row)
+#         chart += "\n"
+#     return chart
 
 def get_sales(cost_matrix, bus):
     sales = 0

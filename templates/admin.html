@@ -6,11 +6,11 @@
     <hr>
     {% if chart %}
         {% for row in chart %}
-        <p>{{ row }}</p>
+            <p>{{ row }}</p>
         {% endfor %}
     {% endif %}
     {% if sales %}
-        <p></p>
+        <p><b>Total sales: ${{ sales }}</b></p>
     {% endif %}
     <form action="/admin" method="POST">
         <label for="username">Username:</label>
