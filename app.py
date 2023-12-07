@@ -31,9 +31,11 @@ def admin():
         
         if check_login(username, password):
             flash('Login successful!', 'success')
-            print_bus_chart()
-            bus_chart = get_bus_chart()
-            total_sales = get_sales(get_cost_matrix(), bus_chart)
+            chart = generate_seating_chart()
+            total_sales = get_sales(get_cost_matrix(), chart)
+            # print_bus_chart(chart)
+            return render_template('admin.html', chart=chart, sales=total_sales)
+            
         else:
             flash('Invalid username or password.', 'error')
     
@@ -64,16 +66,6 @@ def generate_seating_chart():
 
     return chart
 
-def print_seating_chart(chart):
-
-    chart = generate_seating_chart()
-
-    for row in chart:
-        print(row)
-
-    return "Seating chart has been printed."
-
-
 def get_cost_matrix():
     cost_matrix = [[100, 75, 50, 100] for row in range(12)]
     return cost_matrix
@@ -87,11 +79,12 @@ def get_bus_chart(data,cost):
 
     return bus
 
-def print_bus_chart(bus):
-    for row in bus:
-        print(row)
+# def print_bus_chart(bus):
+#     for row in bus:
+#         print(row)
 
-    return
+#     return
+
 
 def get_sales(cost_matrix, bus):
     sales = 0
