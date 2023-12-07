@@ -31,9 +31,9 @@ def admin():
         if check_login(username, password):
             flash('Login successful!', 'success')
             chart = generate_seating_chart()
-            total_sales = get_sales(get_cost_matrix(), chart)
-            # formatted_chart = print_bus_chart(chart)
-            return render_template('admin.html', chart=chart, sales=total_sales)
+            sales = get_sales(get_cost_matrix(), chart)
+            # print_bus_chart(chart)
+            return render_template('admin.html', chart=chart, sales=sales)
             
         else:
             flash('Invalid username or password.', 'error')

@@ -5,12 +5,17 @@
     <h1 class="title">Admin Login</h1>
     <hr>
     {% if chart %}
+        <b>Printing seating chart...</b>
+        <p></p>
+        <div class="chart">
         {% for row in chart %}
             <p>{{ row }}</p>
         {% endfor %}
+
+        </div>
     {% endif %}
     {% if sales %}
-        <p><b>Total sales: ${{ sales }}</b></p>
+        <p>Total Sales: ${{sales}}</p>
     {% endif %}
     <form action="/admin" method="POST">
         <label for="username">Username:</label>
