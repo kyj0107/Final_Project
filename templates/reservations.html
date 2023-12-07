@@ -9,19 +9,12 @@
         {% if success %}
           <p>Congratulations, {{ name }}! Row: {{ row }}, Seat: {{ column }} is now reserved for you. Enjoy your trip!</p>
           <p>Your E-ticket number is: {{ ticket }}</p>
-          <div>
-            {% for row in chart %}
-              <p>{{ row }}</p>
-            {% endfor %}
-        </div>
         {% endif %}
-      {% if chart %}
-        <div>
-          {% for row in chart %}
-              <p>{{ row }}</p>
-          {% endfor %}
-        </div>
-      {% endif %}
+      <div>
+        {% for row in chart %}
+            <p>{{ row }}</p>
+        {% endfor %}
+      </div>
         <form action="/reservations" method="post">
             <label for="fname">First Name:</label><br>
             <input type="text" id="fname" name="fname"><br><br>
