@@ -164,5 +164,5 @@ def save_reservation(first_name, seat_row, seat_column, ticket_number):
     file.write("{}, {}, {}, {}\n".format(first_name, seat_row, seat_column, ticket_number))
     file.close()
 
-app.run(host="0.0.0.0", port=5001)
+app.run(host="0.0.0.0")
 
