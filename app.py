@@ -63,8 +63,9 @@ def reservations():
                 else:
                     ticket = generate_ticket(first_name)
                     save_reservation(first_name, row, column, ticket)
+                    new_chart = generate_seating_chart()
                     success = True
-                    return render_template('reservations.html', name=first_name, chart=chart, row=row+1, column=column+1, ticket=ticket, success=success)
+                    return render_template('reservations.html', name=first_name, new_chart=new_chart, row=row+1, column=column+1, ticket=ticket, success=success)
             except:
                 flash("Make sure to choose a row and a seat!")
             

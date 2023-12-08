@@ -12,4 +12,5 @@ Eva, 1, 1, EIvNaFOTC4320
 Andrew, 0, 0, AInNdFrOeTwC4320
 Ruby, 0, 3, RIuNbFyOTC4320
 James, 2, 0, JIaNmFeOsTC4320
-Kristofferson, 1, 3, KIrNiFsOtToCf4f3e2r0son
+Kristofferson, 1, 3, KIrNiFsOtToCf4f3e2r0sonColton, 11, 0, CIoNlFtOoTnC4320
+INFOTC, 11, 0, IINNFFOOTTCC4320

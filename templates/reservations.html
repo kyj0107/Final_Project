@@ -6,15 +6,22 @@
     <hr>
     <h2>Seating Chart</h2>
     <div>
-        {% if success %}
-          <p>Congratulations, {{ name }}! Row: {{ row }}, Seat: {{ column }} is now reserved for you. Enjoy your trip!</p>
-          <p>Your E-ticket number is: {{ ticket }}</p>
-        {% endif %}
-      <div>
+      {% if success %}
+        
+      <p>Congratulations, {{ name }}! Row: {{ row }}, Seat: {{ column }} is now reserved for you. Enjoy your trip!</p>
+      <p>Your E-ticket number is: {{ ticket }}</p>
+      <div class = "chart">
+        {% for row in new_chart %}
+            <p>{{ row }}</p>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class = "chart">
         {% for row in chart %}
             <p>{{ row }}</p>
         {% endfor %}
       </div>
+    {% endif %}
         <form action="/reservations" method="post">
             <label for="fname">First Name:</label><br>
             <input type="text" id="fname" name="fname"><br><br>
